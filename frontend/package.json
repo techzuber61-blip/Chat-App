@@ -12,7 +12,9 @@
   "dependencies": {
     "chat-app": "file:..",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
