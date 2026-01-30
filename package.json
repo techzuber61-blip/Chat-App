@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start" : "npm run start --prefix backend"
+    "start": "npm run start --prefix backend"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
     "url": "https://github.com/techzuber61-blip/Chat-Ap/issues"
   },
   "homepage": "https://github.com/techzuber61-blip/Chat-Ap#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
 }
