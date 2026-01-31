@@ -11,10 +11,11 @@ import { ENV } from './lib/env.js';
 const app = express();
 const __dirname = path.resolve();
 
-app.use(express.json());
 
 const PORT = ENV.PORT || 3000;
 
+app.use(express.json({limit: "5mb"}));
+app.use(express.urlencoded({limit: "5mb", extended: true}));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
