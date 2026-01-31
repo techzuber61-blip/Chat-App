@@ -1,4 +1,5 @@
 import { sendWelcomeEmail } from "../emails/emailHandlers.js"
+import cloudinary from "../lib/cloudinary.js"
 import { ENV } from "../lib/env.js"
 import { generateToken } from "../lib/utils.js"
 import User from "../models/User.model.js"
@@ -112,4 +113,35 @@ export const logout = async (_, res) => {
         console.log("Error in logout controller ",error)
         res.send(500).json({message: "Internal Server Error"})
     }*/
+}
+
+export const updateProfile = async (req, res) => {
+    const {fullName, profilePic} = req.body
+
+    try {
+        const {profilePic} = req.body;
+        if(!profilePic) {
+            return res.status(400).json({message: "Please upload a profile picture"})
+        }
+
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+        if(!user) {
+            return res.status(400).json({message: "User not found"})
+        }
+
+        const uploadResponse = await cloudinary.uploader.upload(profilePic);
+
+        const updatedUser = await User.findByIdAndUpdate(userId, 
+            userId,
+            {profilePic:uploadResponse.secure_url}, 
+            {new: true}
+        )
+
+        res.status(200).json(updatedUser)
+
+    } catch (error) {
+        console.log("Error in updateProfile controller ",error)
+        res.send(500).json({message: "Internal Server Error"})
+    }
 }
